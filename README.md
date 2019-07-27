@@ -4,6 +4,8 @@ This example demonstrates the example for acheiving 2way ssl on both ingress ( i
 
 ### 2 WAY SSL
 If you are not aware about how 2 way ssl works or how it is different from 1 way ssl . Please refer to this [article](https://tutorialspedia.com/an-overview-of-one-way-ssl-and-two-way-ssl/)
+### Generating self-signed certificates for 2way ssl ( Mutual  TLS )
+For generating self-signed , I found this [link](https://blog.cloudboost.io/implementing-mutual-ssl-authentication-fc20ab2392b3) to be quiet helpful. Ensure however that the common name used for client/server certificate should be different from the common name used for the CA certificate
 
 
 ## Description
