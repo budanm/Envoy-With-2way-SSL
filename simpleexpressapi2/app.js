@@ -30,7 +30,7 @@ app.use(function (req, res, next) {
 
 app.get("/service/2", function (req, res) {
     console.log('inside');
-    res.send("Hello I am a simeple express api service 2");
+    res.send("Hello I am a simple express api service 2 and I am protected");
     res.end();
 });
 
