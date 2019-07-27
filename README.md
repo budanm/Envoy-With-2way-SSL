@@ -31,13 +31,15 @@ docker-compose up
 
 Step3: Verify service 1 is up and running
 ```
-curl -v -k https://localhost:8443/service/1
+curl -k -v --cert front-envoy-proxy/certificates/clientB-crt.pem --key front-envoy-proxy/certificates/clientB-key.pem https://localhost:8443/service/1
+
 Expected response : TLS Handhake steps  + Hello I am a simple express api service 1 and I am unprotected
 ```
 
 Step4: Verify service 2 is up and running
 ```
-curl -v -k https://localhost:8443/service/2 
+curl -k -v --cert front-envoy-proxy/certificates/clientB-crt.pem --key front-envoy-proxy/certificates/clientB-key.pem https://localhost:8443/service/2
+ 
 Expected response : TLS Handshake steps +  Hello I am a simple express api service 2 and I am protected
 ```
 
