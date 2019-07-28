@@ -35,14 +35,21 @@ Step3: Verify service 1 is up and running
 ```
 curl -k -v --cert front-envoy-proxy/certificates/clientB-crt.pem --key front-envoy-proxy/certificates/clientB-key.pem https://localhost:8443/service/1
 
-Expected response : TLS Handhake steps  + Hello I am a simple express api service 1 and I am unprotected
+Expected response : TLS Handhake steps  + Hello I am a simple express api service 1 with a sidecar envoy proxy and I am unprotected
 ```
 
 Step4: Verify service 2 is up and running
 ```
 curl -k -v --cert front-envoy-proxy/certificates/clientB-crt.pem --key front-envoy-proxy/certificates/clientB-key.pem https://localhost:8443/service/2
  
-Expected response : TLS Handshake steps +  Hello I am a simple express api service 2 and I am protected
+Expected response : TLS Handshake steps +  Hello I am a simple express api service 2 with a sidecar envoy proxy attached and I am protected
+```
+
+Step5: Verify service 3 is up and running
+```
+curl -k -v --cert front-envoy-proxy/certificates/clientB-crt.pem --key front-envoy-proxy/certificates/clientB-key.pem https://localhost:8443/service/3
+ 
+Expected response : TLS Handshake steps +  Hello I am a simple standalone express api service 3 and I am protected
 ```
 
 The reason for using -k option with curl is because of the reason mentioned in their manuals as shown below

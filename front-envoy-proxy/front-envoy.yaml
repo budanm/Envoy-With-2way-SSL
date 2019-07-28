@@ -53,10 +53,9 @@ static_resources:
                 route:
                   cluster: service2              
               - match:
-                  prefix: "/httpbin"
+                  prefix: "/service/3"
                 route:
-                  cluster: httpbin
-                  host_rewrite: httpbin.org
+                  cluster: service3
           http_filters:
           - name: envoy.router
             typed_config: {}
@@ -100,15 +99,30 @@ static_resources:
               socket_address:
                 address: service2
                 port_value: 80
-  - name: httpbin
-    common_lb_config:
-      healthy_panic_threshold:
-        value: 0.0
+  - name: service3
     connect_timeout: 0.25s
-    type: STRICT_DNS
-    dns_lookup_family: V4_ONLY
-    lb_policy: ROUND_ROBIN
-    hosts: [{ socket_address: { address: httpbin.org, port_value: 80 }}]
+    type: strict_dns
+    lb_policy: round_robin
+    tls_context:
+      common_tls_context:
+        sni: "example.com"
+        tls_certificates:
+          - certificate_chain:
+              filename: "/etc/clientnode-crt.pem"
+            private_key:
+              filename: "/etc/clientnode-key.pem"
+        validation_context:
+          trusted_ca:
+            filename: "/etc/canode-crt.pem"
+    load_assignment:
+      cluster_name: service3
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: service3
+                port_value: 8080
 admin:
   access_log_path: "/dev/null"
   address:

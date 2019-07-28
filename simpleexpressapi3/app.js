@@ -6,7 +6,7 @@ var options = {
     key: fs.readFileSync('certs/servernode-key.pem'),
     cert: fs.readFileSync('certs/servernode-crt.pem'),
     ca: fs.readFileSync('certs/canode-crt.pem'), //client auth ca OR cert
-    requestCert: true, 
+    requestCert: true,
     rejectUnauthorized: false
 };
 
@@ -28,9 +28,9 @@ app.use(function (req, res, next) {
 });
 
 
-app.get("/service/2", function (req, res) {
+app.get("/service/3", function (req, res) {
     console.log('inside');
-    res.send("Hello I am a simple express api service 2 with a sidecar envoy proxy attached and I am protected ");
+    res.send("Hello I am a simple standalone express api service 3 and I am protected ");
     res.end();
 });
 
